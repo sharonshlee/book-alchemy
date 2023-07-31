@@ -3,7 +3,7 @@ Install the flask, sqlalchemy, flask_sqlalchemy, and jinja2 libraries into your 
 """
 from datetime import datetime
 import os
-from data_models import db, Author
+from data_models import db, Author, Book
 
 from flask import Flask, render_template, request, jsonify
 
@@ -44,6 +44,23 @@ def add_author():
         return jsonify({'message': 'Author added successfully!'}), 201
 
     return render_template('add_author.html')
+
+
+@app.route('/books', methods=['GET', 'POST'])
+def add_book():
+    if request.method == 'POST':
+        new_book = Book(
+            isbn=request.form.get('isbn'),
+            title=request.form.get('title'),
+            publication_year=request.form.get('publication_year'),
+            author_id=request.form.get('author')
+        )
+        db.session.add(new_book)
+        db.session.commit()
+        return jsonify({'message': 'Book added successfully!'}), 201
+
+    authors = db.session.query(Author).order_by(Author.name.asc()).all()
+    return render_template('add_book.html', authors=authors)
 
 
 if __name__ == '__main__':
