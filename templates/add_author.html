@@ -4,19 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   </head>
   <body>
+  <div class="list-books-title">
+      <h1>My Favourite Books</h1>
+      <div class="nav_bar">
+        <a href="/books">Add Book</a> |
+        <a href="/">List Books</a>
+      </div>
+  </div>
+  <br><br>
+  <div class="add-form">
+    <form action="/authors" method="POST">
+      <label for="name">Author Name:</label>
+      <input type="text" id="name" name="name" required><br><br>
 
-  <form action="/authors" method="POST">
-  <label for="name">Author Name:</label> 
-  <input type="text" id="name" name="name" required><br><br>
-  
-  <label for="birthdate">Birthdate:</label> 
-  <input type="date" id="birthdate" name="birthdate" required><br><br> 
-  <label for="date_of_death">Date of Death:</label> 
-  <input type="date" id="date_of_death" name="date_of_death"><br><br>
-  <input type="submit" value="Add Author"> 
-  </form>
-
+      <label for="birthdate">Birthdate:</label>
+      <input type="date" id="birthdate" name="birthdate" required><br><br>
+      <label for="date_of_death">Date of Death:</label>
+      <input type="date" id="date_of_death" name="date_of_death"><br><br>
+      <input type="submit" value="Add Author">
+    </form>
+  </div>
   </body>
 </html>

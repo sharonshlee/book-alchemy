@@ -1,16 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   </head>
   <body>
-
-    {% for book in books %}
-    <div> <h3>{{ book.title }}</h3>
-    </div>
-    {% endfor %}
+  <div class="list-books-title">
+    <h1>My Favourite Books</h1>
+      <div class="nav_bar">
+          <a href="/books">Add Book</a> |
+          <a href="/authors">Add Author</a><br><br>
+          <form action="/">
+              <label for="sort">Sort Books by: </label>
+              <select id="sort" name="sort">
+                  <option value="title_asc" >title(a-z)</option>
+                  <option value="title_desc">title(z-a)</option>
+                  <option value="author_asc">author(a-z)</option>
+                  <option value="author_desc">author(z-a)</option>
+              </select>
+              <input type="submit" value="Sort">
+          </form>
+      </div>
+  </div>
+  <div>
+      <ol class="book-grid">
+      {% for book in books %}
+          <li>
+              <div class="book">
+                    <img class="book-poster" src="{{book.cover_image_url}}"
+                         alt="{{ book.title }} book cover image not available">
+                    <div class="book-title">{{ book.title }}</div>
+                    <div class="book-author">{{book.author.name}}</div>
+              </div>
+          </li>
+      {% endfor %}
+      </ol>
+  </div>
 
   </body>
 </html>

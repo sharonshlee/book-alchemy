@@ -27,6 +27,7 @@ class Book(db.Model):
     isbn = db.Column(db.String)
     title = db.Column(db.String)
     publication_year = db.Column(db.Integer)
+    cover_image_url = db.Column(db.String)
     author_id = db.Column(db.Integer, db.ForeignKey('author.id'))
 
     # Create a relationship between Book and Author
