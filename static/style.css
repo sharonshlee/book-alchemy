@@ -5,7 +5,7 @@ body {
 }
 
 .list-books-title {
-  padding: 10px 0;
+  padding: 10px 50px;
   background: #823271;
   color: white;
   text-align: center;
@@ -62,5 +62,25 @@ a, .nav_bar {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     width: 128px;
     height: 193px;
+}
+
+.search_sort_forms {
+    display: flex;
+    justify-content: space-between;
+}
+
+.search_text_button {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 5%;
+}
+
+#search {
+ width: 200px;
+}
+
+input[type=text] {
+  width: 100%;
 }
 

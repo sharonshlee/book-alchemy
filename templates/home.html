@@ -7,32 +7,46 @@
   <div class="list-books-title">
     <h1>My Favourite Books</h1>
       <div class="nav_bar">
-          <a href="/books">Add Book</a> |
-          <a href="/authors">Add Author</a><br><br>
-          <form action="/">
-              <label for="sort">Sort Books by: </label>
-              <select id="sort" name="sort">
-                  <option value="title_asc" >title(a-z)</option>
-                  <option value="title_desc">title(z-a)</option>
-                  <option value="author_asc">author(a-z)</option>
-                  <option value="author_desc">author(z-a)</option>
-              </select>
-              <input type="submit" value="Sort">
-          </form>
+          <div class="search_sort_forms">
+              <div>
+                  <a href="/books">Add Book</a> |
+                  <a href="/authors">Add Author</a>
+              </div>
+              <form action="/search_book" method="POST">
+                  <div class="search_text_button">
+                      <input type="text" id="search" name="search" placeholder="search your favourite book">
+                      <input type="submit" value="Search">
+                  </div>
+              </form>
+              <form action="/">
+                  <label for="sort">Sort Books by: </label>
+                  <select id="sort" name="sort">
+                      <option value="title_asc" >title(a-z)</option>
+                      <option value="title_desc">title(z-a)</option>
+                      <option value="author_asc">author(a-z)</option>
+                      <option value="author_desc">author(z-a)</option>
+                  </select>
+                  <input type="submit" value="Sort">
+              </form>
+          </div>
       </div>
   </div>
   <div>
       <ol class="book-grid">
-      {% for book in books %}
-          <li>
-              <div class="book">
-                    <img class="book-poster" src="{{book.cover_image_url}}"
-                         alt="{{ book.title }} book cover image not available">
-                    <div class="book-title">{{ book.title }}</div>
-                    <div class="book-author">{{book.author.name}}</div>
-              </div>
-          </li>
-      {% endfor %}
+          {% if books %}
+              {% for book in books %}
+                  <li>
+                      <div class="book">
+                            <img class="book-poster" src="{{book.cover_image_url}}"
+                                 alt="{{ book.title }} book cover image not available">
+                            <div class="book-title">{{ book.title }}</div>
+                            <div class="book-author">{{book.author.name}}</div>
+                      </div>
+                  </li>
+              {% endfor %}
+          {% else %}
+            {{ error_message }}
+          {% endif %}
       </ol>
   </div>
 

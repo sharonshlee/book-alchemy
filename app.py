@@ -45,12 +45,30 @@ def get_sorted_books(sort):
         return Book.query.join(Author).order_by(Author.name.desc()).all()
 
 
+def search_book_by_title(search_keyword):
+    return Book.query.filter(Book.title.like(f'%{search_keyword}%')).all()
+
+
 @app.route('/')
 def index():
     sort = request.args.get('sort')
     books = get_sorted_books(sort)
-
     return render_template('home.html', books=books)
+
+
+@app.route('/search_book', methods=['POST'])
+def search_book():
+    """
+    Render all the books that meet the search criteria,
+    or display a message that says there were no books that match the search criteria.
+    """
+    search_keyword = request.form.get('search')
+    books = search_book_by_title(search_keyword)
+    if books:
+        return render_template('home.html', books=books)
+    else:
+        error_message = f'There were no books that match {search_keyword}.'
+    return render_template('home.html', error_message=error_message)
 
 
 @app.route('/authors', methods=['GET', 'POST'])
