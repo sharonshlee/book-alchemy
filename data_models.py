@@ -1,17 +1,23 @@
-
+"""Data models for Author and Book classes"""
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
 
 class Author(db.Model):
+    """
+    Author Class
+    """
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String)
     birth_date = db.Column(db.Date)
     date_of_death = db.Column(db.Date)
 
     def __repr__(self) -> str:
-        return f"Author(id={self.id}, name={self.name}, birth_date={self.birth_date}, date_of_death={self.date_of_death})"
+        return f"Author(id={self.id}, " \
+               f"name={self.name}, " \
+               f"birth_date={self.birth_date}, " \
+               f"date_of_death={self.date_of_death})"
 
     def __str__(self) -> str:
         return f"""Author info:
@@ -23,6 +29,9 @@ class Author(db.Model):
 
 
 class Book(db.Model):
+    """
+    Book Class
+    """
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     isbn = db.Column(db.String)
     title = db.Column(db.String)

@@ -5,12 +5,13 @@
   </head>
   <body>
   <div class="list-books-title">
-    <h1>My Favourite Books</h1>
+    <h1>Sharon's Library</h1>
       <div class="nav_bar">
           <div class="search_sort_forms">
               <div>
                   <a href="/books">Add Book</a> |
-                  <a href="/authors">Add Author</a>
+                  <a href="/authors">Add Author</a> |
+                  <a href="/">List Books</a>
               </div>
               <form action="/search_book" method="POST">
                   <div class="search_text_button">
@@ -32,6 +33,11 @@
       </div>
   </div>
   <div>
+      <div class="book-delete">
+          {% if message %}
+          <br>{{message}}
+          {% endif %}
+      </div>
       <ol class="book-grid">
           {% if books %}
               {% for book in books %}
@@ -41,6 +47,7 @@
                                  alt="{{ book.title }} book cover image not available">
                             <div class="book-title">{{ book.title }}</div>
                             <div class="book-author">{{book.author.name}}</div>
+                            <div class="book-author"><a href="/book/{{book.id}}/delete">Delete</a></div>
                       </div>
                   </li>
               {% endfor %}
